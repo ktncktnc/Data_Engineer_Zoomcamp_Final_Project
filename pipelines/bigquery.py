@@ -5,8 +5,6 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 from utils import get_savepath, load_config
 import os
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', 100)
 
 
 @task(retries=1)
