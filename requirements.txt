@@ -1,0 +1,4 @@
+prefect~=2.8.7
+python-dotenv
+pandas
+google-cloud-storage
