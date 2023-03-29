@@ -1,5 +1,7 @@
 prefect~=2.8.7
+prefect-gcp[cloud_storage]
 python-dotenv
 pandas
 google-cloud-storage
 pyarrow~=11.0.0
+pandas-gbq
