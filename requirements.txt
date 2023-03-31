@@ -6,3 +6,4 @@ google-cloud-storage
 pyarrow~=11.0.0
 pandas-gbq
 python-dotenv
+dbt-bigquery
