@@ -5,6 +5,8 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 from utils import get_savepath, load_config
 import os
+import pytz
+from datetime import datetime, timedelta
 
 
 @task(retries=1)
@@ -46,7 +48,13 @@ def write_bq(df: pd.DataFrame) -> None:
 
 
 @flow
-def etl_gcs_to_bigquery(year, month, day, hours, env_file='.env'):
+def etl_gcs_to_bigquery(year=None, month=None, day=None, hours=None, env_file='.env'):
+    if year is None:
+        current_time = datetime.now(pytz.utc) - timedelta(hours=1)
+        year = current_time.year
+        month = current_time.month
+        day = current_time.day
+        hours = current_time.hour
     load_config(env_file)
     _, __, gcs_path = get_savepath(year, month, day, hours)
     data = extract_from_gcs(os.getenv('GCS_BUCKET'), gcs_path)

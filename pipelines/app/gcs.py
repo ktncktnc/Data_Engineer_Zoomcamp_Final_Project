@@ -2,7 +2,9 @@ from prefect import flow, task
 import gzip
 import json
 from requests import get
+import pytz
 import os
+from datetime import datetime, timedelta
 import pandas as pd
 from prefect_gcp.cloud_storage import GcsBucket
 from utils import mkdir_if_not_exist, load_config, get_savepath, get_file_link
@@ -41,8 +43,14 @@ def remove_files(json_path, parquet_path):
 
 
 @flow(name='load_file')
-def etl_web_to_gcs(year, month, day, hours=None, env_file='.env'):
+def etl_web_to_gcs(year=None, month=None, day=None, hours=None, env_file='.env'):
     load_config(env_file)
+    if year is None:
+        current_time = datetime.now(pytz.utc) - timedelta(hours=1)
+        year = current_time.year
+        month = current_time.month
+        day = current_time.day
+        hours = current_time.hour
     json_path, parquet_path, gcs_path = get_savepath(year, month, day, hours)
     url = get_file_link(year, month, day, hours)
     get_file(url, json_path)
@@ -50,6 +58,5 @@ def etl_web_to_gcs(year, month, day, hours=None, env_file='.env'):
     upload_to_gcs(parquet_path, gcs_path)
     remove_files(json_path, parquet_path)
 
-
 if __name__ == '__main__':
-    etl_web_to_gcs(2023, 3, 26, 1)
+    etl_web_to_gcs()
