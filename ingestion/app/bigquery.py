@@ -55,7 +55,8 @@ def etl_gcs_to_bigquery(year=None, month=None, day=None, hours=None, env_file='.
         month = current_time.month
         day = current_time.day
         hours = current_time.hour
-    load_config(env_file)
+    if env_file is not None:
+        load_config(env_file)
     _, __, gcs_path = get_savepath(year, month, day, hours)
     data = extract_from_gcs(os.getenv('GCS_BUCKET'), gcs_path)
     df = transform(data)

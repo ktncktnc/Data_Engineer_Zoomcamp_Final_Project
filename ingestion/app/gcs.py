@@ -44,7 +44,8 @@ def remove_files(json_path, parquet_path):
 
 @flow(name='load_file')
 def etl_web_to_gcs(year=None, month=None, day=None, hours=None, env_file='.env'):
-    load_config(env_file)
+    if env_file is not None:
+        load_config(env_file)
     if year is None:
         current_time = datetime.now(pytz.utc) - timedelta(hours=1)
         year = current_time.year
