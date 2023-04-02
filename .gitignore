@@ -3,4 +3,4 @@ data
 **/.env
 **/.DS_Store
 **/__pycache__
-**/*.yaml
+**/*-deployment.yaml
