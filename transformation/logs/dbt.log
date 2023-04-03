@@ -1,13 +1,13 @@
 
 
-============================== 2023-03-31 08:47:59.501220 | 3a4c45be-685f-44b7-9b9d-45b2a44806a1 ==============================
-[0m08:47:59.501220 [info ] [MainThread]: Running with dbt=1.4.1
-[0m08:47:59.502828 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/ktnc/.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
-[0m08:47:59.503039 [debug] [MainThread]: Tracking: tracking
-[0m08:47:59.510088 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947eee0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947e7c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947edc0>]}
-[0m08:48:02.755934 [debug] [MainThread]: Starter project path: /home/ktnc/anaconda3/lib/python3.9/site-packages/dbt/include/starter_project
-[0m08:48:48.505315 [info ] [MainThread]: Profile gh_archive written to /home/ktnc/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
-[0m08:48:48.505827 [info ] [MainThread]: 
+============================== 2023-04-03 08:53:52.035819 | 91da6b77-21eb-40d8-adc2-725c6e135db9 ==============================
+[0m08:53:52.035819 [info ] [MainThread]: Running with dbt=1.4.5
+[0m08:53:52.037888 [debug] [MainThread]: running dbt with arguments {'write_json': True, 'use_colors': True, 'printer_width': 80, 'version_check': True, 'partial_parse': True, 'static_parser': True, 'profiles_dir': '/home/ktnc/.dbt', 'send_anonymous_usage_stats': True, 'quiet': False, 'no_print': False, 'cache_selected_only': False, 'skip_profile_setup': False, 'which': 'init', 'indirect_selection': 'eager'}
+[0m08:53:52.038185 [debug] [MainThread]: Tracking: tracking
+[0m08:53:52.040104 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75d7534fd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75d7536440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75d7534b20>]}
+[0m08:53:56.419610 [debug] [MainThread]: Starter project path: /home/ktnc/Data_Engineer_Zoomcamp_Final_Project/venv/lib/python3.10/site-packages/dbt/include/starter_project
+[0m08:54:32.908339 [info ] [MainThread]: Profile gh_archive written to /home/ktnc/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m08:54:32.909327 [info ] [MainThread]: 
 Your new dbt project "gh_archive" was created!
 
 For more information on how to configure the profiles.yml file,
@@ -23,5 +23,5 @@ Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
 
 Happy modeling!
 
-[0m08:48:48.506501 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947e670>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947eac0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fe4d947e880>]}
-[0m08:48:48.506952 [debug] [MainThread]: Flushing usage events
+[0m08:54:32.909998 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75c329b6a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75d7535510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f75d7536440>]}
+[0m08:54:32.910521 [debug] [MainThread]: Flushing usage events

@@ -1,5 +1,7 @@
 prefect~=2.8.7
 prefect-gcp[cloud_storage]
+prefect-dbt
+prefect-dbt[bigquery]
 python-dotenv
 pandas
 google-cloud-storage

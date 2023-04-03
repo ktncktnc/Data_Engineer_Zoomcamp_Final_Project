@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: gh_archive
+    description: Database Bigquery of Github Archive
+    tables:
+      - name: raw_log
