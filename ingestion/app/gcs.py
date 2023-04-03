@@ -31,8 +31,8 @@ def preprocess_file(json_path, parquet_path):
 
 
 @task(retries=3)
-def upload_to_gcs(parquet_path, gcs_path):
-    gcs_block = GcsBucket.load(os.getenv('GCS_BUCKET'))
+def upload_to_gcs(gcs_bucket, parquet_path, gcs_path):
+    gcs_block = GcsBucket.load(gcs_bucket)
     gcs_block.upload_from_path(from_path=parquet_path, to_path=gcs_path)
 
 
@@ -42,21 +42,27 @@ def remove_files(json_path, parquet_path):
     os.remove(parquet_path)
 
 
+@task(log_prints=True)
+def check_file():
+    print(".env ", os.path.exists('.env'))
+    print('~/env/gh_archive/.env ', os.path.exists('~/env/gh_archive/.env'))
+
+
 @flow(name='load_file')
-def etl_web_to_gcs(year=None, month=None, day=None, hours=None, env_file='.env'):
-    if env_file is not None:
-        load_config(env_file)
+def etl_web_to_gcs(year=None, month=None, day=None, hours=None, data_path='../data', gcs_bucket='gh-archive'):
+    # if env_file is not None:
+    #     load_config(env_file)
     if year is None:
         current_time = datetime.now(pytz.utc) - timedelta(hours=1)
         year = current_time.year
         month = current_time.month
         day = current_time.day
         hours = current_time.hour
-    json_path, parquet_path, gcs_path = get_savepath(year, month, day, hours)
+    json_path, parquet_path, gcs_path = get_savepath(data_path, year, month, day, hours)
     url = get_file_link(year, month, day, hours)
     get_file(url, json_path)
     preprocess_file(json_path, parquet_path)
-    upload_to_gcs(parquet_path, gcs_path)
+    upload_to_gcs(gcs_bucket, parquet_path, gcs_path)
     remove_files(json_path, parquet_path)
 
 if __name__ == '__main__':

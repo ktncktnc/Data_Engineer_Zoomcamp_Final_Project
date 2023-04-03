@@ -10,11 +10,10 @@ from datetime import datetime, timedelta
 
 
 @task(retries=1)
-def extract_from_gcs(bucket_name, file_path):
-    local_folder = os.getenv('DATA_PATH')
+def extract_from_gcs(bucket_name, data_path, file_path):
     gcs_block = GcsBucket.load(bucket_name)
-    gcs_block.get_directory(from_path=file_path, local_path=local_folder)
-    return Path(os.path.join(local_folder, file_path))
+    gcs_block.get_directory(from_path=file_path, local_path=data_path)
+    return Path(os.path.join(data_path, file_path))
 
 
 @task(log_prints=True)
@@ -48,17 +47,16 @@ def write_bq(df: pd.DataFrame) -> None:
 
 
 @flow
-def etl_gcs_to_bigquery(year=None, month=None, day=None, hours=None, env_file='.env'):
+def etl_gcs_to_bigquery(year=None, month=None, day=None, hours=None, data_path='../data', gcs_bucket='gh-archive'):
     if year is None:
         current_time = datetime.now(pytz.utc) - timedelta(hours=1)
         year = current_time.year
         month = current_time.month
         day = current_time.day
         hours = current_time.hour
-    if env_file is not None:
-        load_config(env_file)
-    _, __, gcs_path = get_savepath(year, month, day, hours)
-    data = extract_from_gcs(os.getenv('GCS_BUCKET'), gcs_path)
+
+    _, __, gcs_path = get_savepath(data_path, year, month, day, hours)
+    data = extract_from_gcs(gcs_bucket, data_path, gcs_path)
     df = transform(data)
     write_bq(df)
 
