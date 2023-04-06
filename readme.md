@@ -3,11 +3,15 @@ This project includes codes for an end-to-end data pipeline.
 
 ## Information
 Data: [Github Archive](https://www.gharchive.org/)
+
 Data ingestion: Python & Pandas
+
 Data transformation: DBT
+
 BI tool: [Superset](http://35.221.215.49:8088/superset/dashboard/5/)
 - Username: doremon6a1@gmail.com
 - Password: 123123
+- 
 Orchestration: Prefect
 ![Prefect](images/prefect.png)
 
