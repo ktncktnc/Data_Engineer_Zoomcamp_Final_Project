@@ -10,8 +10,8 @@ This project includes codes for an end-to-end data pipeline.
 
 ```mermaid
 flowchart TD
-    A(Raw logs) -->B(Google Cloud Storage)
-    B --> C(BigQuery)
+    A(Raw logs) -->|Python| B(Google Cloud Storage)
+    B --> |Python| C(BigQuery)
     C --> |DBT| Superset
 ```
 ## Install
@@ -32,23 +32,23 @@ prefect agent start -p default-agent-pool
     + Register GCP prefect block: 
     + Create essential blocks:
       + Register GCP prefect block:
-        ```
-        prefect block register -m prefect_gcp
-        ```
+```
+prefect block register -m prefect_gcp
+```
       + Create blocks: GCP Credentials, GCP Bucket
     + Deploy flows: Run commands below, you will see deployment on UI
       + Ingestion:
-        ```
-        cd ingestion/app
-        prefect deployment build -n etl_data_to_big_query etl:etl_data_to_big_query --apply
-        ```
+```
+cd ingestion/app
+prefect deployment build -n etl_data_to_big_query etl:etl_data_to_big_query --apply
+```
       + DBT:
         + Edit `project_dir` and `profiles_dir` values on file [dbt.py](ingestion/app/dbt.py) to folder transformation/gh_archive and dbt profile folder, respectively.
         + Deploy:
-        ```
-        cd ingestion/app
-        prefect deployment build -n trigger_dbt_transformation dbt:trigger_dbt_transformation --apply
-        ```
+```
+cd ingestion/app
+prefect deployment build -n trigger_dbt_transformation dbt:trigger_dbt_transformation --apply
+```
 
 - Install and run Superset
     + [Install docker first](https://docs.docker.com/engine/install/)
